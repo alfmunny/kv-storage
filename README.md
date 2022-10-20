@@ -30,6 +30,20 @@ Advanced(ideas):
 
 ![Architect](./architect.png)
 
+## Structure
+
+```
+- include (headers)
+- lib (3-party libs)
+- src (source code)
+    - kv.cpp (storage code)
+    - kv_services.cpp (service code with RPC)
+    - kv_primary.cpp (service of primary node, sharding logic)
+- primary.cpp (compiles to executable "primary", program for starting a primary node)
+- secondary.cpp (compiles to executable "secondary", program for starting a secondary node)
+- main.cpp (compiles to executable, a simple test client demo)
+```
+
 ## Library
 
 - [rpclib](https://github.com/rpclib/rpclib): simple RPC communication
