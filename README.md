@@ -120,8 +120,8 @@ docker build . -t celonis-kv
 
 For example using the [deploy.yaml](./deploy.yaml):
 
-- One Primary Node, exposes on 8080
-- Two Second Node
+- One primary node, exposes on 8080
+- Two secondary nodes
 
 ```bash
 kubectl apply -f deploy.yaml
