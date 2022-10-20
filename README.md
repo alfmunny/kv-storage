@@ -51,7 +51,7 @@ Advanced(ideas):
 
 ## Build local
 
-- Linux
+- Linux and ARM 64bit (The libs may not be compatible on other platforms, or you can build your own libs with source code of [rpclib](https://github.com/rpclib/rpclib) and [EVA01](https://github.com/alfmunny/EVA01) and copy them into lib)
 - gcc-9
 
 ```bash
