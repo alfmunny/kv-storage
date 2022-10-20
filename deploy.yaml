@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: celonis-kv-pod
+  labels:
+    purpose: provide-distributed-kv-storage
+spec:
+  containers:
+  - name: secondary-kv-1
+    image: celonis-kv
+    command: ["bin/secondary"]
+    args: ["127.0.0.1:8080", "8081"]
+    imagePullPolicy: Never
+  - name: secondary-kv-2
+    image: celonis-kv
+    command: ["bin/secondary"]
+    args: ["127.0.0.1:8080", "8082"]
+    imagePullPolicy: Never
+  - name: primary-kv
+    image: celonis-kv
+    command: ["bin/primary"]
+    args: ["8080", "127.0.0.1:8081", "127.0.0.1:8082"]
+    ports:
+      - containerPort: 8080
+    imagePullPolicy: Never
+    
