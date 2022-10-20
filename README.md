@@ -40,6 +40,34 @@ Advanced(ideas):
 - Linux
 - gcc-9
 
+```bash
+cmake .
+make
+```
+
+Start several secondary nodes:
+
+```bash
+bin/secondary 127.0.0.1:8080 8081
+bin/secondary 127.0.0.1:8080 8082
+```
+
+Start one primary node:
+
+```bash
+bin/primary 8080 127.0.0.1:8081 127.0.0.1:8082
+```
+
+Access the KV-Storage Services using [simple RPC client](./main.cpp).
+
+It tries to "PUT" some value and "GET" them back.
+
+Run test:
+
+```
+bin/main 127.0.0.1 8080
+```
+
 ## Build in docker
 
 Build the image in docker
@@ -103,7 +131,6 @@ We can already access in the cluster.
 
 Let's test the distributed services with our test program [main.cpp](./main.cpp)
 
-It tries to "PUT" some value and "GET" them back.
 
 ```bash
 kubectl exec -it celonis-kv-pod -- sh
@@ -143,9 +170,7 @@ NAME       STATUS   ROLES           AGE    VERSION   INTERNAL-IP    EXTERNAL-IP 
 minikube   Ready    control-plane   116m   v1.25.2   192.168.49.2   <none>        Ubuntu 20.04.5 LTS   5.15.49-linuxkit   docker://20.10.18
 ```
 
-
-
-Access the service from local machine (`--network=host` is used):
+Access the service from local machine (use `--network=host`):
 
 ```
 docker run -ti --rm --network=host celonis-kv bin/main 192.168.49.2 8080
