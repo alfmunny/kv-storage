@@ -9,7 +9,6 @@ int main() {
 
     client.call("PUT", "wei", "wei@gmail.com");
 
-
     std::cout << client.call("GET", "wei").as<std::pair<bool, std::string>>().second << std::endl;
 
     client.call("DEL", "wei");

@@ -14,9 +14,9 @@ class KVService {
 public:
   KVService(const std::string& primary_node, const uint16_t port,
             const size_t thread_pool_size = 1)
-      : m_primary_node(primary_node), m_iom(thread_pool_size, "kv_service"),
+      : m_primary_node(primary_node),
         m_server(port) {
-    EVA_LOGGER("system")->setLevel(eva01::LogLevel::INFO);
+    //EVA_LOGGER("system")->setLevel(eva01::LogLevel::INFO);
     //m_iom.addTimer(1000, [&]() { sendHeartbeat(); }, true);
 
     m_server.bind("PUT", [&](const std::string& key, const std::string& val) { return put(key, val); });
@@ -50,7 +50,7 @@ private:
 
 private:
   std::string m_primary_node;
-  eva01::IOManager m_iom;
+  //eva01::IOManager m_iom;
   rpc::server m_server;
   KVDatabase m_kvdb;
 };
