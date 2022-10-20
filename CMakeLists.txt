@@ -17,11 +17,12 @@ set(LIB_SRC
     src/kv_primary.cpp
     )
 
-add_library(celonis STATIC ${LIB_SRC})
-target_link_libraries(celonis rpc eva01 pthread)
+add_library(celonis SHARED ${LIB_SRC})
 
 set(LIBS 
-    celonis 
+    celonis
+    rpc
+    eva01
     pthread
 )
 
@@ -32,10 +33,6 @@ target_link_libraries(main ${LIBS})
 add_executable(secondary secondary.cpp)
 add_dependencies(secondary celonis)
 target_link_libraries(secondary ${LIBS})
-
-add_executable(primary primary.cpp)
-add_dependencies(primary celonis)
-target_link_libraries(primary ${LIBS})
 
 add_custom_target(run
     COMMAND main)
