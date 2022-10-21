@@ -1,7 +1,14 @@
 # Distributed Key-Value-Store Celonis Challenge
 
 Auther: Yuanchen Zhang
+
 GitHub: https://github.com/alfmunny
+
+## Changes
+
+- Standalone docker build, no need to compile 3 party libs.
+- Using Kubernetes Deployment
+- A new command line tool to interact with the app
 
 ## Architect
 
