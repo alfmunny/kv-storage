@@ -36,7 +36,7 @@ spec:
       - name: primary-kv
         image: celonis-kv
         command: ["bin/primary"]
-        args: ["9000", "secondary-kv-1:8081", "secondary-kv-2:8082"]
+        args: ["9000", "secondary-kv-1:8081", "secondary-kv-2:8082", "secondary-kv-3:8081"]
         ports:
           - containerPort: 9000
         imagePullPolicy: Never

@@ -6,8 +6,6 @@ RUN apt-get -y install git
 RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 20
 RUN update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-9 20
 
-RUN cmake --version;
-
 WORKDIR /celonis
 COPY . .
 
