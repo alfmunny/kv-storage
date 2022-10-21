@@ -29,15 +29,11 @@ int main(int argc, char* argv[]) {
                 port << c;
             }
         }
-        std::cout << "host: " << host.str() << ", port: " << port.str() << std::endl;
+        std::cout << "connecting to " << host.str() << ":" << port.str() << std::endl;
         kvnodes.push_back({ host.str(), atoi(port.str().c_str())});
     }
 
-
     celonis::KVPrimary kvp(atoi(argv[1]), kvnodes);
-
-    kvp.put("alice", "alice@gmail");
-    kvp.put("bob", "bob@gmail");
 
     kvp.run();
     return 0;

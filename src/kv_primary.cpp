@@ -1,4 +1,5 @@
 #include <celonis/kv_primary.h>
+#include <iostream>
 
 namespace celonis {
 
@@ -45,7 +46,9 @@ int KVPrimary::selectShard(const std::string& key)
     }
     // Simple key mapping
     // Use the first character of the key to map to a unique shard
-    return (int)key[0] % m_clients.size();
+    int shard = (int)key[0] % m_clients.size();
+    std::cout << "Shard selected " << shard << std::endl;
+    return shard;
 }
 
 }  // namespace celonis

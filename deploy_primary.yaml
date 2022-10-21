@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: primary-kv
+  labels:
+    run: primary-kv
+spec:
+  type: NodePort
+  ports:
+  - port: 9000
+    targetPort: 9000
+    protocol: TCP
+    name: rpc
+  selector:
+    run: primary-kv
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: primary-kv
+  labels:
+    purpose: provide-distributed-kv-storage
+spec:
+  selector:
+    matchLabels:
+      run: primary-kv 
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        run: primary-kv
+    spec:
+      containers:
+      - name: primary-kv
+        image: celonis-kv
+        command: ["bin/primary"]
+        args: ["9000", "secondary-kv-1:8081", "secondary-kv-2:8082"]
+        ports:
+          - containerPort: 9000
+        imagePullPolicy: Never
+    
+

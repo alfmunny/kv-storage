@@ -8,8 +8,6 @@ GitHub: https://github.com/alfmunny
 - Primary Node
     - Static list of secondary nodes
     - Exposes RPC services
-    - Accept requests from clients
-    - Simple implementation of sharding.
         - Static mapping
         - Map key to an unique shard(one secondary node)
     - Dockerized
@@ -27,6 +25,7 @@ Advanced(ideas):
     - Heartbeat from secondary nodes to primary node
     - Regester the secondary nodes onto primary node while receiving heartbeat.
     - Zookeeper
+    - Use a look up table on primary node to mark the shard ID corresponding a specific key
 
 ![Architect](./architect.png)
 
@@ -37,7 +36,7 @@ Advanced(ideas):
 - lib (3-party libs)
 - src (source code)
     - kv.cpp (storage code)
-    - kv_services.cpp (service code with RPC)
+    - kv_service.cpp (service code with RPC)
     - kv_primary.cpp (service of primary node, sharding logic)
 - primary.cpp (compiles to executable "primary", program for starting a primary node)
 - secondary.cpp (compiles to executable "secondary", program for starting a secondary node)
@@ -187,5 +186,61 @@ minikube   Ready    control-plane   116m   v1.25.2   192.168.49.2   <none>      
 Access the service from local machine (use `--network=host`):
 
 ```
-docker run -ti --rm --network=host celonis-kv bin/main 192.168.49.2 8080
+docker run -ti --rm --network=host celonis-kv bin/main 192.168.49.2 30234
+```
+
+
+## Deploy with Kubernetes Deployment
+
+Each instance has its own pod.
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: primary-kv
+  labels:
+    run: primary-kv
+spec:
+  type: NodePort
+  ports:
+  - port: 8080
+    targetPort: 8080
+    protocol: TCP
+    name: rpc
+  selector:
+    run: primary-kv
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: primary-kv
+  labels:
+    purpose: provide-distributed-kv-storage
+spec:
+  selector:
+    matchLabels:
+      run: primary-kv 
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        run: primary-kv
+    spec:
+      containers:
+      - name: primary-kv
+        image: celonis-kv
+        command: ["bin/primary"]
+        args: ["8080", "secondary-kv-1:8080", "secondary-kv-2:8080"]
+        ports:
+          - containerPort: 8080
+        imagePullPolicy: Never
+```
+
+
+```bash
+kubectl get services
+minikube service primary-kv --url
 ```
