@@ -196,7 +196,6 @@ Access the service from local machine (use `--network=host`):
 docker run -ti --rm --network=host celonis-kv bin/main 192.168.49.2 30234
 ```
 
-
 ## Deploy with Kubernetes Deployment
 
 Each instance has its own pod.
@@ -250,4 +249,9 @@ spec:
 ```bash
 kubectl get services
 minikube service primary-kv --url
+```
+
+Overwatch logs
+```
+kubectl logs pods/secondary-kv-1 -f
 ```
