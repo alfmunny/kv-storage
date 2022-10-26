@@ -35,7 +35,7 @@ spec:
       - name: secondary-kv-2
         image: celonis-kv
         command: ["bin/secondary"]
-        args: ["primary-kv:8080", "8082"]
+        args: ["primary-kv:8080", "mysql:3306", "8082"]
         ports:
           - containerPort: 8082
         imagePullPolicy: Never

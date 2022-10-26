@@ -13,11 +13,12 @@ namespace celonis {
 class KVService {
 
 public:
-    static constexpr uint64_t default_kvdb_capacity = 1000000;
+    static const constexpr uint64_t default_kvdb_capacity = 1000000;
     using EvictionPolicy = KVDatabase::EvictionPolicy;
     /* Constructor
      */
-    KVService(const std::string& primary_node, const std::string& persistent_db, const uint16_t port,
+    KVService(const std::string& primary_node, const uint16_t port,
+              const std::string& persistent_db = "", 
               const uint64_t kvdb_capacity = default_kvdb_capacity,
               const EvictionPolicy kvdb_policy = EvictionPolicy::LRU, const size_t thread_pool_size = 1);
 

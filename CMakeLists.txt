@@ -28,6 +28,7 @@ set(LIB_SRC
     )
 
 add_library(celonis SHARED ${LIB_SRC})
+target_link_libraries(celonis mysqlcppconn)
 
 set(LIBS 
     pthread

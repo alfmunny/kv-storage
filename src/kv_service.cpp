@@ -5,8 +5,8 @@ namespace celonis {
 static eva01::Logger::ptr g_logger = EVA_ROOT_LOGGER();
 
 KVService::KVService(const std::string& primary_node,
-                     const std::string& persistent_db, 
                      const uint16_t port,
+                     const std::string& persistent_db, 
                      const uint64_t kvdb_capacity,
                      const EvictionPolicy kvdb_policy,
                      const size_t thread_pool_size)

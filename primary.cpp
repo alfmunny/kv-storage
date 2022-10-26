@@ -5,7 +5,7 @@
 int main(int argc, char* argv[]) {
     if (argc < 2) {
         std::cout
-            << "Usage: provide port for service"
+            << "Usage: provide port for primary service and all the addresses of secondary nodes"
             << std::endl;
         return EXIT_FAILURE;
     }

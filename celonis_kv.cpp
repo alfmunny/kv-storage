@@ -1,8 +1,6 @@
 #include <iostream>
 #include <rpc/client.h>
 
-#define CMD 1024
-
 int main(int argc, char* argv[]) {
     if (argc < 3) {
         std::cout << "Usage: Provide host and port of the primary node" << std::endl;
@@ -30,8 +28,8 @@ int main(int argc, char* argv[]) {
             client.call("PUT", key, value);
         } else if (ss == "DEL") {
             client.call("DEL", key);
-        } else {
-
+        } else if (ss == "exit") {
+            break;
         }
         ss.clear();
     }

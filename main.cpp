@@ -28,5 +28,7 @@ int main(int argc, char* argv[]) {
     std::cout << "Get bob: empty" << std::endl;
     std::cout << client.call("GET", "bob").as<std::pair<bool, std::string>>().second << std::endl;
 
+    std::cout << "Congratulation, databases are working!" << std::endl;
+
     return 0;
 }
