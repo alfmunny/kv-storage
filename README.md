@@ -158,7 +158,7 @@ bob@gmail.com
 ...
 ```
 
-You can also do it in a container if you have the Kubenetes environment set up. 
+You can also do it in a container if you have the Kubrenetes environment set up. 
 ```bash
 docker run -it --rm --network=host celonis-kv bin/celonis_kv 192.168.49.2 30409
 Connecting to 192.168.49.2:30409
