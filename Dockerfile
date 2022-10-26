@@ -2,6 +2,8 @@ FROM ubuntu:22.04
 
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y g++-9 gcc-9 cmake build-essential gdb
 RUN apt-get -y install git
+RUN apt-get -y mysql-client mysql-server libmysqlclient-dev libboost-dev
+RUN systemctl start mysql.service
 
 RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 20
 RUN update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-9 20

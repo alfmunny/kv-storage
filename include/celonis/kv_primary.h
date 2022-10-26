@@ -8,8 +8,14 @@
 
 namespace celonis {
 
+/* KVPrimary
+ * Provide primary services for kv storage.
+ */
 class KVPrimary {
 public:
+    /*
+     * Constructor
+     */
     KVPrimary(uint16_t port, std::vector<std::pair<std::string, int>> snodes);
 
     /* GET
