@@ -1,4 +1,4 @@
-# Distributed Key-Value-Store Celonis Challenge
+# Simple Distributed Key-Value-Store
 
 Auther: Yuanchen Zhang
 
